@@ -22,6 +22,6 @@
       <li class="nav-item"><a href="<%= followings_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(followings_user_path(@user)) %>">Followings</a></li>
       <li class="nav-item"><a href="<%= followers_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(followers_user_path(@user)) %>">Followers</a></li>
     </ul>
-    <%= render 'posts/posts', posts: @posts %>
+    <%= render 'users', users: @followers %>
   </div>
 </div>

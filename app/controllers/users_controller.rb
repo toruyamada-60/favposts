@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:index, :show, :edit, :update]
+  before_action :require_user_logged_in, only: [:index, :show, :edit, :update, :followings, :followers]
   before_action :correct_user, only: [:edit, :create, :destroy]
   
   def index
@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @posts = @user.posts.order(id: :desc).page(params[:page])
   end
 
   def new
@@ -49,6 +50,16 @@ class UsersController < ApplicationController
     redirect_to root_url
   end
   
+  def followings
+    @user = User.find(params[:id])
+    @followings = @user.followings.page(params[:page])
+  end
+  
+  def followers
+    @user = User.find(params[:id])
+    @followers = @user.followers.page(params[:page])
+  end
+  
   private
   
   def user_params
@@ -61,5 +72,4 @@ class UsersController < ApplicationController
       redirect_to root_url
     end
   end
-
 end

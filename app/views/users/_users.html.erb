@@ -3,7 +3,7 @@
     <% users.each do |user| %>
       <li class="media">
         <% if user.image? %>
-          <%= image_tag user.image.url %>
+          <%= image_tag user.image.url, class: 'img-fluid' %>
         <% else %>
           <img class="mr-2 rounded" src="<%= gravatar_url(user, { size:50 }) %>" alt="">
         <% end %>

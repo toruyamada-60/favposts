@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:index, :show]
+  before_action :require_user_logged_in, only: [:index, :show, :edit, :update]
+  before_action :correct_user, only: [:edit, :create, :destroy]
   
   def index
     @users = User.order(id: :desc).page(params[:page]).per(25)
@@ -25,9 +26,40 @@ class UsersController < ApplicationController
     end
   end
   
+  def edit
+    @user = User.find(params[:id])
+  end
+  
+  def update
+    @user = User.find(params[:id])
+    
+    if @user.update(user_params)
+      flash[:success] = 'ユーザー情報を更新しました。'
+      redirect_to @user
+    else
+      flash.now[:danger] = 'ユーザー情報を更新できませんでした。'
+      render :edit
+    end
+  end
+  
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    flash[:success] = 'ユーザーを削除しました。'
+    redirect_to root_url
+  end
+  
   private
   
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :image)
   end
+
+  def correct_user
+    @user = User.find_by(id: params[:id])
+    unless @user == current_user
+      redirect_to root_url
+    end
+  end
+
 end

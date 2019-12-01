@@ -11,7 +11,6 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
   # storage :fog
   
-  # 画像の上限を640x480にする
   process :resize_to_limit => [300, 300]
   
   # Override the directory where uploaded files will be stored.

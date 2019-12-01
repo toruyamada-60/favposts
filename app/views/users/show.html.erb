@@ -6,9 +6,9 @@
       </div>
       <div class="card-body">
         <% if @user.image? %>
-          <%= image_tag @user.image.url, class: 'img-fluid' %>
+          <%= image_tag @user.image.url, :size => '300x300', class: 'img-fluid' %>
         <% else %>
-          <img class="rounded img-fluid" src="<%= gravatar_url(@user, { size: 500 }) %>" alt="">
+          <%= image_tag '/assets/default_image.png', :size => '300x300', class: 'img-fluid' %>
         <% end %>
       </div>
     </div>

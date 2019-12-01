@@ -6,7 +6,7 @@
           <% if post.user.image? %>
             <%= image_tag post.user.image.url, :size => '100x100', class: 'img-fluid' %>
           <% else %>
-            <%= image_tag '/assets/default_image.png', :size => '100x100', class: 'img-fluid' %>
+            <%= image_tag 'default_image.png', :size => '100x100', class: 'img-fluid' %>
           <% end %>
         </div>
         <div class="media-body col-sm-9">
